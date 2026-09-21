@@ -2,9 +2,9 @@
 {
 	public class Dispatcher
 	{
-		private uint _nbSucces;
-		private uint _nbEchec;
+		private int _nbSucces;
+		private int _nbEchec;
 		//private
-		private uint _difficulteGlobale;
+		private int _difficulteGlobale;
 	}
 }

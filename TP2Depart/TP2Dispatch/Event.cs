@@ -2,5 +2,7 @@
 {
 	public class Event
 	{
+		private string _name;
+
 	}
 }
