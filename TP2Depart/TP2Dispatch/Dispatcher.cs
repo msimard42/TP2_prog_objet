@@ -3,8 +3,8 @@
 	public class Dispatcher
 	{
 		private int _nbSucces;
-		private int _nbEchec;
+		private int _nbFailure;
 		//private
-		private int _difficulteGlobale;
+		private int _globalDifficulty;
 	}
 }
