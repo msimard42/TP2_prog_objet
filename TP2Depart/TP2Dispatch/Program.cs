@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TP2
+namespace TP2Dispatch
 {
 	public class Program
 	{
