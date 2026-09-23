@@ -7,11 +7,14 @@ namespace TP2Dispatch
 {
 	public class Hero
 	{
+		const int STARTING_LEVEL = 1;
+		const int BASE_REST_AMOUNT = 0;
+
 		private string _name;
 		private int _level;
 		private int _restRemaining;
 		private Stats _playerStats;
-		private Dictionary<Event, bool> _history;
+		private Dictionary<string, EventOutcome> _history;
 
 		public string Name
 		{
@@ -49,7 +52,7 @@ namespace TP2Dispatch
 			}
 		}
 
-		public Dictionary<Event, bool> History
+		public Dictionary<string, EventOutcome> History
 		{
 			get => _history;
 			private set
@@ -58,6 +61,13 @@ namespace TP2Dispatch
 			}
 		}
 
-		//public Heroes(string name, 
+		public Hero(string name, Stats stats)
+		{
+			this.Name = name;
+			this.Level = STARTING_LEVEL;
+			this.RestRemaining = BASE_REST_AMOUNT;
+			this.PlayerStats = stats;
+			this.History = new Dictionary<string, EventOutcome>();
+		}
 	}
 }
