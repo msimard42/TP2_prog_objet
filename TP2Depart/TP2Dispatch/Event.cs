@@ -4,6 +4,7 @@
 	{
 		const int POINTS = 2; //tmp name
 		const int BASE_STAT = 1;
+
 		private string _name;
 		private int _difficulty;
 		private Stats _stat;
@@ -62,13 +63,13 @@
 
 		public EventOutcome ResolveEvent(List<Hero> heroes)
 		{
-			EventOutcome outcome = EventOutcome.Echec;
+			EventOutcome outcome = EventOutcome.Failure;
 
 			if (heroes is null || heroes.Count == 0)
 				return outcome;
 
 			if (RandomGenerator.NextFloat() < CalculateSuccessProbability(heroes))
-				outcome = EventOutcome.Succes;
+				outcome = EventOutcome.Success;
 
 			foreach (Hero hero in heroes)
 				; // hero.ResolveEvent(this.Name, outcome);

@@ -2,7 +2,7 @@
 {
 	public enum EventOutcome
 	{
-		Succes,
-		Echec
+		Success,
+		Failure
 	}
 }
