@@ -2,6 +2,9 @@
 {
 	public class Event
 	{
+		const int POINTS = 2; //tmp name
+		const int BASE_STAT = 1;
+
 		private string _name;
 		private int _difficulty;
 		private Stats _stat;
@@ -43,7 +46,7 @@
 		public float CalculateSuccessProbability(List<Hero> heroes)
 		{
 			int[] heroesStats = new int[Enum.GetValues<StatsName>().Length];
-			float prob = 0.00f;
+			float prob = 0.00f; // tmp name
 			
 			foreach (Hero hero in heroes)
 				for (int i = 0; i < Enum.GetValues<StatsName>().Length; i++)
@@ -51,7 +54,7 @@
 
 			for (int i = 0; i < heroesStats.Length; i++)
 			{
-				float tmp = (float)heroesStats[i] / this.Stat.GetStatValue(Enum.GetValues<StatsName>()[i]);
+				float tmp = (float)heroesStats[i] / this.Stat.GetStatValue(Enum.GetValues<StatsName>()[i]); //tmp name
 				prob += tmp > 1 ? 1 : tmp;
 			}
 
@@ -60,13 +63,13 @@
 
 		public EventOutcome ResolveEvent(List<Hero> heroes)
 		{
-			EventOutcome outcome = EventOutcome.Echec;
+			EventOutcome outcome = EventOutcome.Failure;
 
 			if (heroes is null || heroes.Count == 0)
 				return outcome;
 
-			if (RandomGenerator.NextFloat() * 100 < CalculateSuccessProbability(heroes))
-				outcome = EventOutcome.Succes;
+			if (RandomGenerator.NextFloat() < CalculateSuccessProbability(heroes))
+				outcome = EventOutcome.Success;
 
 			foreach (Hero hero in heroes)
 				; // hero.ResolveEvent(this.Name, outcome);
@@ -77,10 +80,10 @@
 		private Stats CreateStatisticsBasedOnDifficulty()
 		{
 			int[] stats = new int[Enum.GetValues<StatsName>().Length];
-			int pointsLeft = this.Difficulty + 2;
+			int pointsLeft = this.Difficulty + POINTS;
 
 			for (int i = 0; i < stats.Length; i++)
-				stats[i] = 1;
+				stats[i] = BASE_STAT;
 
 			while (pointsLeft > 0)
 			{
@@ -89,6 +92,12 @@
 			}
 
 			return new(stats[(int)StatsName.Vigor], stats[(int)StatsName.Mobility], stats[(int)StatsName.Intelligence], stats[(int)StatsName.Charisma]);
+		}
+
+		public override string ToString()
+		{
+			return $"Situation nécessitant une intervention : {this.Name}, Difficulté : {this.Difficulty}\n" +
+				$"Attributs nécessaires pour répondre à la situation : {this.Stat}\n";
 		}
 	}
 }
