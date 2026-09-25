@@ -88,8 +88,8 @@ namespace TP2Dispatch
 		public Stats(int mobility, int vigor, int intelligence, int charisma)
 		{
 			this.StatsList = new Dictionary<StatsName, int>();
-			this.StatsList.Add(StatsName.Mobility, mobility);
 			this.StatsList.Add(StatsName.Vigor, vigor);
+			this.StatsList.Add(StatsName.Mobility, mobility);
 			this.StatsList.Add(StatsName.Intelligence, intelligence);
 			this.StatsList.Add(StatsName.Charisma, charisma);
 		}

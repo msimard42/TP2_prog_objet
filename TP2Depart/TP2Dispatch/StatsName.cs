@@ -6,8 +6,8 @@ namespace TP2Dispatch
 {
 	public enum StatsName
 	{
-		Mobility,
 		Vigor,
+		Mobility,
 		Intelligence,
 		Charisma
 	}
