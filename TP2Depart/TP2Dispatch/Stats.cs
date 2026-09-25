@@ -7,59 +7,8 @@ namespace TP2Dispatch
 	public class Stats
 	{
 		const int BASE_STAT_VALUE = 1;
-		//private int _mobility;
-		//private int _vigor;
-		//private int _intelligence;
-		//private int _charisma;
+
 		private Dictionary<StatsName, int> _statsList;
-
-		//public int Mobility
-		//{
-		//	get => _mobility;
-		//	private set
-		//	{
-		//		if (value < 1)
-		//			_mobility = BASE_STAT_VALUE;
-		//		else
-		//			_mobility = value;
-		//	}
-		//}
-
-		//public int Vigor
-		//{
-		//	get => _vigor;
-		//	private set
-		//	{
-		//		if (value < 1)
-		//			_vigor = BASE_STAT_VALUE;
-		//		else
-		//			_vigor = value;
-		//	}
-		//}
-
-		//public int Intelligence
-		//{
-		//	get => _intelligence;
-		//	private set
-		//	{
-		//		if (value < 1)
-		//			_intelligence = BASE_STAT_VALUE;
-		//		else
-		//			_intelligence = value;
-		//	}
-		//}
-
-		//public int Charisma
-		//{
-		//	get => _charisma;
-		//	private set
-		//	{
-		//		if (value < 1)
-		//			_charisma = BASE_STAT_VALUE;
-		//		else
-		//			_charisma = value;
-		//	}
-		//}
 
 		private Dictionary<StatsName, int> StatsList
 		{
@@ -72,10 +21,6 @@ namespace TP2Dispatch
 
 		public Stats()
 		{
-			//Mobility = BASE_STAT_VALUE;
-			//Vigor = BASE_STAT_VALUE;
-			//Intelligence = BASE_STAT_VALUE;
-			//Charisma = BASE_STAT_VALUE;
 			StatsList = new Dictionary<StatsName, int>();
 			int nbOfStats = Enum.GetValues<StatsName>().Length;
 			for (int i = 0; i < nbOfStats; i++)
@@ -94,22 +39,17 @@ namespace TP2Dispatch
 			this.StatsList.Add(StatsName.Charisma, charisma);
 		}
 
-		public void IncreaseRandomStats(int amountToSplit)
+		public void IncreaseStat(StatsName statToIncrease, int amountToIncrease)
 		{
-			Random rng = new Random();
-			for (int i = 0; i < amountToSplit; i++)
-			{
-				int statToIncrease = rng.Next(0, 4);
-				this.StatsList[(StatsName)statToIncrease]++;
-			}
+			this.StatsList[statToIncrease] += amountToIncrease;
 		}
 
-		public int GetStatValue(StatsName name)
+		public int GetStatValue(StatsName statName)
 		{
 			int statValue = -1;
 			foreach (KeyValuePair<StatsName, int> stat in StatsList)
 			{
-				if (name == stat.Key)
+				if (statName == stat.Key)
 					statValue = stat.Value;
 			}
 			if (statValue < 0)
