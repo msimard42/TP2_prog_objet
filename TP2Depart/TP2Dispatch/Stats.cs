@@ -61,10 +61,10 @@ namespace TP2Dispatch
 		//	}
 		//}
 
-		public Dictionary<StatsName, int> StatsList
+		private Dictionary<StatsName, int> StatsList
 		{
 			get => _statsList;
-			private set
+			set
 			{
 				_statsList = value;
 			}
@@ -85,7 +85,7 @@ namespace TP2Dispatch
 			}
 		}
 
-		public Stats(int mobility, int vigor, int intelligence, int charisma)
+		public Stats(int vigor, int mobility, int intelligence, int charisma)
 		{
 			this.StatsList = new Dictionary<StatsName, int>();
 			this.StatsList.Add(StatsName.Vigor, vigor);
@@ -96,7 +96,12 @@ namespace TP2Dispatch
 
 		public void IncreaseRandomStats(int amountToSplit)
 		{
-			//to do
+			Random rng = new Random();
+			for (int i = 0; i < amountToSplit; i++)
+			{
+				int statToIncrease = rng.Next(0, 4);
+				this.StatsList[(StatsName)statToIncrease]++;
+			}
 		}
 
 		public int GetStatValue(StatsName name)
@@ -112,6 +117,17 @@ namespace TP2Dispatch
 				throw new ArgumentOutOfRangeException("The searched Enum was out of bound");
 			}
 			return statValue;
+		}
+
+		public override string ToString()
+		{
+			string statsAsString = string.Empty;
+			int nbOfStats = Enum.GetValues<StatsName>().Length;
+			for (int i = 0; i < nbOfStats; i++)
+			{
+				statsAsString += $"{this.StatsList.ElementAt(i).Key}: {this.StatsList[(StatsName)i]}. ";
+			}
+			return statsAsString;
 		}
 	}
 }
