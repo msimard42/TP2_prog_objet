@@ -65,7 +65,7 @@ namespace TP2Dispatch
 			int nbOfStats = Enum.GetValues<StatsName>().Length;
 			for (int i = 0; i < nbOfStats; i++)
 			{
-				statsAsString += $"{this.StatsList.ElementAt(i).Key}: {this.StatsList[(StatsName)i]}. ";
+				statsAsString += $"{this.StatsList.ElementAt(i).Key} : {this.StatsList[(StatsName)i],-3} ";
 			}
 			return statsAsString;
 		}
