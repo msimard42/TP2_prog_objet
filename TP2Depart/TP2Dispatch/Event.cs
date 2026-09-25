@@ -40,7 +40,7 @@
 			this.Stat = CreateStatisticsBasedOnDifficulty();
 		}
 
-		public float CalculateSuccessProbability(Hero[] heroes)
+		public float CalculateSuccessProbability(List<Hero> heroes)
 		{
 			int[] heroesStats = new int[Enum.GetValues<StatsName>().Length];
 			float prob = 0.00f;
@@ -58,11 +58,11 @@
 			return prob / Enum.GetValues<StatsName>().Length;
 		}
 
-		public EventOutcome ResolveEvent(Hero[] heroes)
+		public EventOutcome ResolveEvent(List<Hero> heroes)
 		{
 			EventOutcome outcome = EventOutcome.Echec;
 
-			if (heroes is null || heroes.Length == 0)
+			if (heroes is null || heroes.Count == 0)
 				return outcome;
 
 			if (RandomGenerator.NextFloat() * 100 < CalculateSuccessProbability(heroes))
