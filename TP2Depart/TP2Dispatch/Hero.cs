@@ -103,19 +103,7 @@ namespace TP2Dispatch
 			this.History.Add(eventDone, outcome);
 		}
 
-		//public string GetHistory()
-		//{
-		//	string allHistory = string.Empty;
-		//	foreach (KeyValuePair <Event, EventOutcome> history in History)
-		//	{
-		//		allHistory += $"{history.Key.Name} : {history.Value}; ";
-		//	}
-		//	if (allHistory == "")
-		//		allHistory = "aucun événement résolu";
-		//	return allHistory;
-		//}
-
-		private void LevelUp() //À mettre private quand ResolveEvent va fonctionner
+		private void LevelUp()
 		{
 			Random rng = new Random();
 			this.Level++;
