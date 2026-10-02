@@ -6,7 +6,7 @@ namespace TP2Dispatch
 {
 	public class Stats
 	{
-		const int BASE_STAT_VALUE = 1;
+		public const int BASE_STAT_VALUE = 1;
 
 		private Dictionary<StatsName, int> _statsList;
 

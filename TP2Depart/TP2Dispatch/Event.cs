@@ -2,8 +2,8 @@
 {
 	public class Event
 	{
-		const int POINTS = 2; //tmp name
-		const int BASE_STAT = 1;
+		const int EVENT_STATS_POINTS = 2;
+		const int MAX_STATS_PROBABILITIES = 1;
 
 		private string _name;
 		private int _difficulty;
@@ -23,7 +23,7 @@
 			get { return this._difficulty; }
 			private set
 			{
-				this._difficulty = value > 0 ? value : 1;
+				this._difficulty = value >= Dispatcher.BASE_STARTING_DIFFICULTY ? value : Dispatcher.BASE_STARTING_DIFFICULTY;
 			}
 		}
 
@@ -46,7 +46,7 @@
 		public float CalculateSuccessProbability(List<Hero> heroes)
 		{
 			int[] heroesStats = new int[Enum.GetValues<StatsName>().Length];
-			float prob = 0.00f; // tmp name
+			float prob = 0.00f;
 			
 			foreach (Hero hero in heroes)
 				for (int i = 0; i < Enum.GetValues<StatsName>().Length; i++)
@@ -54,8 +54,8 @@
 
 			for (int i = 0; i < heroesStats.Length; i++)
 			{
-				float tmp = (float)heroesStats[i] / this.Stat.GetStatValue(Enum.GetValues<StatsName>()[i]); //tmp name
-				prob += tmp > 1 ? 1 : tmp;
+				float tmpProb = (float)heroesStats[i] / this.Stat.GetStatValue(Enum.GetValues<StatsName>()[i]);
+				prob += tmpProb > MAX_STATS_PROBABILITIES ? MAX_STATS_PROBABILITIES : tmpProb;
 			}
 
 			return prob / Enum.GetValues<StatsName>().Length;
@@ -80,10 +80,10 @@
 		private Stats CreateStatisticsBasedOnDifficulty()
 		{
 			int[] stats = new int[Enum.GetValues<StatsName>().Length];
-			int pointsLeft = this.Difficulty + POINTS;
+			int pointsLeft = this.Difficulty + EVENT_STATS_POINTS;
 
 			for (int i = 0; i < stats.Length; i++)
-				stats[i] = BASE_STAT;
+				stats[i] = Stats.BASE_STAT_VALUE;
 
 			while (pointsLeft > 0)
 			{
