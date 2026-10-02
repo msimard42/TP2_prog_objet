@@ -68,7 +68,7 @@
 			if (heroes is null || heroes.Count == 0)
 				return outcome;
 
-			if (RandomGenerator.NextFloat() < CalculateSuccessProbability(heroes))
+			if (RandomGenerator.NextFloat() <= CalculateSuccessProbability(heroes))
 				outcome = EventOutcome.Success;
 
 			foreach (Hero hero in heroes)
