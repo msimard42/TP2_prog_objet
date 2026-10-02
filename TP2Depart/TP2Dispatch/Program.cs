@@ -6,6 +6,8 @@ namespace TP2Dispatch
 	{
 		public static void Main(string[] args)
 		{
+			Dispatcher dispatch = new();
+			dispatch.DispatchHeroes();
 		}
 
 		public static void TestHeroClass()
