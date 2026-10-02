@@ -95,14 +95,24 @@ namespace TP2Dispatch
 		{
 			int restNeeded = MISSION_REST_INCREASE;
 			if (outcome == EventOutcome.Success)
-				this.Levelup();
+				this.LevelUp();
 			else
 				restNeeded += FAILURE_REST_INCREASE;
 			this.RestRemaining += restNeeded;
 			this.History.Add(eventDone, outcome);
 		}
 
-		public void Levelup() //À mettre private quand ResolveEvent va fonctionner
+		public string GetHistory()
+		{
+			string allHistory = string.Empty;
+			foreach (KeyValuePair <string, EventOutcome> history in History)
+			{
+				allHistory += $"{history.Key} : {history.Value}; ";
+			}
+			return allHistory;
+		}
+
+		private void LevelUp() //À mettre private quand ResolveEvent va fonctionner
 		{
 			Random rng = new Random();
 			this.Level++;
@@ -111,7 +121,7 @@ namespace TP2Dispatch
 			bool canIncreaseStat = true;
 			do
 			{
-				if (this.hasMaxStats())
+				if (this.HasMaxStats())
 					canIncreaseStat = false;
 				else
 				{
@@ -135,7 +145,7 @@ namespace TP2Dispatch
 			} while (canIncreaseStat);
 		}
 
-		private bool hasMaxStats()
+		private bool HasMaxStats()
 		{
 			bool hasMaxStats = true;
 			int nbOfStats = Enum.GetValues<StatsName>().Length;

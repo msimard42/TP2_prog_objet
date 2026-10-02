@@ -62,9 +62,12 @@
 
 		public void DispatchHeroes()
 		{
-			List<Hero> heroesDispatched = new();
+			int cumulativeSuccess = BASE_STARTING_SUCCESS;
 			while (this.NbFailure < 3)
 			{
+				//if (this.NbSuccess % 2 == 0)
+				//	this.GlobalDifficulty++;
+				List<Hero> heroesDispatched = new();
 				Console.Clear();
 				Console.WriteLine("Nombre de succès : {0, -3} , Nombre d'échecs : {1}\n", this.NbSuccess, this.NbFailure);
 				Event currentEvent = new(RandomGenerator.GetRandomEventName(), this.GlobalDifficulty);
@@ -76,6 +79,7 @@
 				}
 				Console.ResetColor();
 
+				int result = -1;
 				do
 				{
 					Console.Write("Héros envoyés sur la scène : [");
@@ -86,10 +90,68 @@
 						Console.Write(heroesDispatched[i].Name);
 					}
 					Console.WriteLine("]\nChance de réussite actuelle : {0:F2} %", currentEvent.CalculateSuccessProbability(heroesDispatched) * 100);
-				} while (int.TryParse(Console.ReadLine(), out int result) && result != 0); //tmp
-				Console.WriteLine("Outcome " + currentEvent.ResolveEvent(heroesDispatched));
-				Console.ReadLine();
+					string userInput = Console.ReadLine();
+					if (IsValidNumber(userInput, out result) && result > 0 && result <= this.HeroesAvailable.Length)
+					{
+						Hero selectedHero = HeroesAvailable[result - 1];
+						if (selectedHero.IsResting())
+							Program.WriteMessage("Hero is resting", ConsoleColor.DarkRed);
+						else if (heroesDispatched.Contains(selectedHero))
+							Program.WriteMessage("Hero is already dispatched", ConsoleColor.DarkRed);
+						else
+							heroesDispatched.Add(selectedHero);
+					}
+					else if (result < 0 || result > this.HeroesAvailable.Length)
+					{
+						Program.WriteMessage("Choosen number is not valid", ConsoleColor.DarkRed);
+					}
+				} while (result != 0); //tmp
+				foreach (Hero hero in this.HeroesAvailable)
+					hero.Rest();
+				if (currentEvent.ResolveEvent(heroesDispatched) == EventOutcome.Success)
+				{
+					Program.WriteMessage("Situation is under control", ConsoleColor.DarkGreen);
+					this.NbSuccess++;
+					if (cumulativeSuccess > 0)
+					{
+						cumulativeSuccess = 0;
+						this.GlobalDifficulty++;
+					}
+					else
+						cumulativeSuccess++;
+				}
+				else
+				{
+					this.NbFailure++;
+					Program.WriteMessage("Situation is out of control", ConsoleColor.DarkRed);
+				}
+				Console.ReadKey();
 			}
+			foreach (Hero hero in this.HeroesAvailable)
+				Console.WriteLine(hero.GetHistory());
+		}
+
+		private bool IsValidNumber(string toCheck, out int number)
+		{
+			if (!int.TryParse(toCheck, out number) || !IsNumber(toCheck))
+			{
+				if (!string.IsNullOrEmpty(toCheck))
+					number = -1;
+				return false;
+			}
+			return true;
+		}
+
+		public static bool IsNumber(string number)
+		{
+			for (int i = 0; i < number.Length; i++)
+			{
+				if (number[i] < 48 || number[i] > 57)
+				{
+					return false;
+				}
+			}
+			return true;
 		}
 	}
 }
