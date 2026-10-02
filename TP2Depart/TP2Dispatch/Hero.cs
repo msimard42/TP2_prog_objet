@@ -9,7 +9,8 @@ namespace TP2Dispatch
 	{
 		const int STARTING_LEVEL = 1;
 		const int STAT_GAIN_PER_LEVEL = 1;
-		const int BASE_REST_AMOUNT = 0;
+		const int STARTING_REST_AMOUNT = 0;
+		const int NOT_RESTING_VALUE = 0;
 		const int MISSION_REST_INCREASE = 2;
 		const int FAILURE_REST_INCREASE = 1;
 		const int MAXIMUM_STAT = 10;
@@ -72,7 +73,7 @@ namespace TP2Dispatch
 		{
 			this.Name = name;
 			this.Level = STARTING_LEVEL;
-			this.RestRemaining = BASE_REST_AMOUNT;
+			this.RestRemaining = STARTING_REST_AMOUNT;
 			this.PlayerStats = stats;
 			this.History = new Dictionary<string, EventOutcome>();
 		}
@@ -80,7 +81,7 @@ namespace TP2Dispatch
 		public bool IsResting()
 		{
 			bool isResting = false;
-			if (this.RestRemaining > BASE_REST_AMOUNT)
+			if (this.RestRemaining > NOT_RESTING_VALUE)
 				isResting = true;
 			return isResting;
 		}
@@ -93,14 +94,15 @@ namespace TP2Dispatch
 		public void ResolveEvent(string eventDone, EventOutcome outcome)
 		{
 			int restNeeded = MISSION_REST_INCREASE;
-			if (outcome == EventOutcome.Succes)
+			if (outcome == EventOutcome.Success)
 				this.Levelup();
 			else
 				restNeeded += FAILURE_REST_INCREASE;
+			this.RestRemaining += restNeeded;
 			this.History.Add(eventDone, outcome);
 		}
 
-		public void Levelup()
+		public void Levelup() //À mettre private quand ResolveEvent va fonctionner
 		{
 			Random rng = new Random();
 			this.Level++;
@@ -116,19 +118,16 @@ namespace TP2Dispatch
 					int choosenIncrease = rng.Next(0, nbOfStats);
 					StatsName choosenStat = (StatsName)choosenIncrease;
 					int choosenStatCurrentValue = this.PlayerStats.GetStatValue(choosenStat);
-					Console.WriteLine($"{this.Name} has {choosenStatCurrentValue} {choosenStat} and wants to increase it by {amountToSplit}");
 					if (choosenStatCurrentValue + amountToSplit <= MAXIMUM_STAT)
 					{
 						this.PlayerStats.IncreaseStat(choosenStat, amountToSplit);
 						amountToSplit = 0;
-						Console.WriteLine($"{choosenStat} is now {this.PlayerStats.GetStatValue(choosenStat)}");
 					}
 					else
 					{
 						int allowedIncrease = MAXIMUM_STAT - choosenStatCurrentValue;
 						this.PlayerStats.IncreaseStat(choosenStat, allowedIncrease);
 						amountToSplit -= allowedIncrease;
-						Console.WriteLine($"Allowed increase = {allowedIncrease}. Amount to split is now {amountToSplit}");
 					}
 					if (amountToSplit == 0)
 						canIncreaseStat = false;
