@@ -1,6 +1,7 @@
-﻿using TP2Dispatch;
+﻿// Étudiant [1] : [William Delarosbil]
+using TP2Dispatch;
 
-namespace TestTP2Dispatch
+namespace TestsTP2Dispatch
 {
 	public class DispatcherTests
 	{

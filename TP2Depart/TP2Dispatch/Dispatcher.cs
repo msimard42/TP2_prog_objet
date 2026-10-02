@@ -1,4 +1,5 @@
-﻿namespace TP2Dispatch
+﻿// Étudiant [1 et 2] : [William Delarosbil && Michaël Simard]
+namespace TP2Dispatch
 {
 	public class Dispatcher
 	{

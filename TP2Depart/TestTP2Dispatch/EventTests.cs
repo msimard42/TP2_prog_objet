@@ -1,4 +1,5 @@
-﻿using TP2Dispatch;
+﻿// Étudiant [1] : [William Delarosbil]
+using TP2Dispatch;
 
 namespace TestTP2Dispatch{
 	public class EventTests
