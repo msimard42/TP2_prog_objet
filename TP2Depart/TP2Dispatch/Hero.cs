@@ -63,7 +63,7 @@ namespace TP2Dispatch
 		public Dictionary<Event, EventOutcome> History
 		{
 			get => _history;
-			set
+			private set
 			{
 				_history = value;
 			}
@@ -105,15 +105,12 @@ namespace TP2Dispatch
 		//public string GetHistory()
 		//{
 		//	string allHistory = string.Empty;
-		//	foreach (KeyValuePair <string, EventOutcome> history in History)
+		//	foreach (KeyValuePair <Event, EventOutcome> history in History)
 		//	{
-		//		if (history.Value == EventOutcome.Success)
-		//			Console.ForegroundColor = ConsoleColor.Green;
-		//		else
-		//			Console.ForegroundColor = ConsoleColor.Red;
-		//		allHistory += $"{history.Key} : {history.Value}; ";
-		//		//Console.ResetColor();
+		//		allHistory += $"{history.Key.Name} : {history.Value}; ";
 		//	}
+		//	if (allHistory == "")
+		//		allHistory = "aucun événement résolu";
 		//	return allHistory;
 		//}
 
@@ -168,6 +165,11 @@ namespace TP2Dispatch
 					hasMaxStats = false;
 			}
 			return hasMaxStats;
+		}
+
+		public override string ToString()
+		{
+			return $"[{this.RestRemaining}] {this.Name, -24} , Level {this.Level} : {this.PlayerStats}";
 		}
 	}
 }
