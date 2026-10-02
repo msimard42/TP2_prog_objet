@@ -59,6 +59,17 @@ namespace TP2Dispatch
 			return statValue;
 		}
 
+		public void LimitStatMax(int max)
+		{
+			int nbOfStats = Enum.GetValues<StatsName>().Length;
+			for (int i = 0; i < nbOfStats; i++)
+			{
+				StatsName statName = (StatsName)i;
+				if (this.StatsList.ElementAt(i).Value > max)
+					this.StatsList[statName] = max;
+			}
+		}
+
 		public override string ToString()
 		{
 			string statsAsString = string.Empty;

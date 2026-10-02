@@ -5,7 +5,7 @@ VisualStudioVersion = 18.10.12224.181 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP2Dispatch", "TP2Dispatch\TP2Dispatch.csproj", "{555A94E2-4F66-4278-A2CA-61120B167D42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTP2Dispatch", "TestTP2Dispatch\TestTP2Dispatch.csproj", "{96B75086-28D3-4A37-8DCE-A220D97B52F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsTP2Dispatch", "TestTP2Dispatch\TestsTP2Dispatch.csproj", "{96B75086-28D3-4A37-8DCE-A220D97B52F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -74,6 +74,7 @@ namespace TP2Dispatch
 			this.Name = name;
 			this.Level = STARTING_LEVEL;
 			this.RestRemaining = STARTING_REST_AMOUNT;
+			stats.LimitStatMax(MAXIMUM_STAT);
 			this.PlayerStats = stats;
 			this.History = new Dictionary<Event, EventOutcome>();
 		}

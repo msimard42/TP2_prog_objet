@@ -124,7 +124,7 @@
 					heroesDispatched.Add(selectedHero);
 			}
 			else if (result < 0 || result > this.HeroesAvailable.Length)
-				WriteMessage("Le numéro entré n'est pas valide", ConsoleColor.DarkRed);
+				WriteMessage("La valeure entrée n'est pas valide", ConsoleColor.DarkRed);
 			return result;
 		}
 
@@ -167,7 +167,7 @@
 				}
 				if (!hasResolveEvents)
 					WriteMessage("aucun événement résolu ", ConsoleColor.DarkRed, false);
-				Console.WriteLine("}");
+				Console.WriteLine("}\n");
 			}
 		}
 
