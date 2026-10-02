@@ -78,5 +78,12 @@ namespace TP2Dispatch
 			Console.WriteLine("Outcome " + @event.ResolveEvent(heroesDispatch));
 			Console.ReadLine();
 		}
+
+		public static void WriteMessage(string message, ConsoleColor color)
+		{
+			Console.ForegroundColor = color;
+			Console.WriteLine(message);
+			Console.ResetColor();
+		}
 	}
 }
