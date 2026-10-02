@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata;
-using System.Text;
-
+﻿// Étudiant [2] : [Michaël Simard]
 namespace TP2Dispatch
 {
 	public class Hero

@@ -1,11 +1,19 @@
-﻿namespace TestTP2Dispatch
+﻿// Étudiant [1] : [William Delarosbil]
+using TP2Dispatch;
+
+namespace TestsTP2Dispatch
 {
 	public class DispatcherTests
 	{
 		[Fact]
-		public void Test3()
+		public void Constructor_Void_Ok()
 		{
+			Dispatcher dispatcher = new();
 
+			Assert.Equal(0, dispatcher.NbFailure);
+			Assert.Equal(0, dispatcher.NbSuccess);
+			Assert.Equal(1, dispatcher.GlobalDifficulty);
+			Assert.Equal(5, dispatcher.HeroesAvailable.Length);
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿namespace TP2Dispatch
+﻿// Étudiant [1 et 2] : [William Delarosbil && Michaël Simard]
+namespace TP2Dispatch
 {
 	public class Dispatcher
 	{
@@ -182,7 +183,7 @@
 			return true;
 		}
 
-		public static bool IsNumber(string number)
+		private static bool IsNumber(string number)
 		{
 			for (int i = 0; i < number.Length; i++)
 			{
@@ -192,7 +193,7 @@
 			return true;
 		}
 
-		public static void WriteMessage(string message, ConsoleColor color, bool newLine = true)
+		private static void WriteMessage(string message, ConsoleColor color, bool newLine = true)
 		{
 			Console.ForegroundColor = color;
 			if (newLine)

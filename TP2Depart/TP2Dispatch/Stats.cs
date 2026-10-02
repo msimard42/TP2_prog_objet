@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿// Étudiant [2] : [Michaël Simard]
 namespace TP2Dispatch
 {
 	public class Stats

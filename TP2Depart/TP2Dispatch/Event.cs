@@ -1,4 +1,5 @@
-﻿namespace TP2Dispatch
+﻿// Étudiant [1] : [William Delarosbil]
+namespace TP2Dispatch
 {
 	public class Event
 	{
@@ -68,7 +69,7 @@
 			if (heroes is null || heroes.Count == 0)
 				return outcome;
 
-			if (RandomGenerator.NextFloat() < CalculateSuccessProbability(heroes))
+			if (RandomGenerator.NextFloat() <= CalculateSuccessProbability(heroes))
 				outcome = EventOutcome.Success;
 
 			foreach (Hero hero in heroes)
