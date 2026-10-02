@@ -65,19 +65,13 @@
 			int cumulativeSuccess = BASE_STARTING_SUCCESS;
 			while (this.NbFailure < 3)
 			{
-				//if (this.NbSuccess % 2 == 0)
-				//	this.GlobalDifficulty++;
 				List<Hero> heroesDispatched = new();
 				Console.Clear();
 				Console.WriteLine("Nombre de succès : {0, -3} , Nombre d'échecs : {1}\n", this.NbSuccess, this.NbFailure);
 				Event currentEvent = new(RandomGenerator.GetRandomEventName(), this.GlobalDifficulty);
 				Console.Write(currentEvent);
 				for (int i = 0; i < this.HeroesAvailable.Length; i++)
-				{
-					Console.ForegroundColor = this.HeroesAvailable[i].IsResting() ? ConsoleColor.DarkRed : ConsoleColor.DarkGreen;
-					Console.WriteLine("{0}. [{1}] {2, -24} , Level {3} : {4}", i + 1, this.HeroesAvailable[i].RestRemaining, this.HeroesAvailable[i].Name, this.HeroesAvailable[i].Level, this.HeroesAvailable[i].PlayerStats);
-				}
-				Console.ResetColor();
+					Program.WriteMessage($"{i + 1}. {this.HeroesAvailable[i]}", this.HeroesAvailable[i].IsResting() ? ConsoleColor.DarkRed : ConsoleColor.DarkGreen);
 
 				int result = -1;
 				do
@@ -105,7 +99,7 @@
 					{
 						Program.WriteMessage("Choosen number is not valid", ConsoleColor.DarkRed);
 					}
-				} while (result != 0); //tmp
+				} while (result != 0);
 				foreach (Hero hero in this.HeroesAvailable)
 					hero.Rest();
 				if (currentEvent.ResolveEvent(heroesDispatched) == EventOutcome.Success)
@@ -127,11 +121,12 @@
 				}
 				Console.ReadKey();
 			}
-			foreach (Hero hero in this.HeroesAvailable)
-				Console.WriteLine(hero.GetHistory());
+			Console.WriteLine("Votre quart de travail est terminé! Voici la performance de vos héros :\n");
+			//foreach (Hero hero in this.HeroesAvailable)
+			//	Console.WriteLine($"{hero.Name} : {'{'} {hero.GetHistory()}{'}'}");
 		}
 
-		private bool IsValidNumber(string toCheck, out int number)
+		private static bool IsValidNumber(string toCheck, out int number)
 		{
 			if (!int.TryParse(toCheck, out number) || !IsNumber(toCheck))
 			{

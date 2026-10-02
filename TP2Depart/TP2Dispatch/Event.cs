@@ -72,7 +72,7 @@
 				outcome = EventOutcome.Success;
 
 			foreach (Hero hero in heroes)
-				hero.ResolveEvent(this.Name, outcome);
+				hero.ResolveEvent(this, outcome);
 
 			return outcome;
 		}

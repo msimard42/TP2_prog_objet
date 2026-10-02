@@ -19,7 +19,7 @@ namespace TP2Dispatch
 		private int _level;
 		private int _restRemaining;
 		private Stats _playerStats;
-		private Dictionary<string, EventOutcome> _history;
+		private Dictionary<Event, EventOutcome> _history;
 
 		public string Name
 		{
@@ -60,10 +60,10 @@ namespace TP2Dispatch
 			}
 		}
 
-		private Dictionary<string, EventOutcome> History
+		public Dictionary<Event, EventOutcome> History
 		{
 			get => _history;
-			set
+			private set
 			{
 				_history = value;
 			}
@@ -75,7 +75,7 @@ namespace TP2Dispatch
 			this.Level = STARTING_LEVEL;
 			this.RestRemaining = STARTING_REST_AMOUNT;
 			this.PlayerStats = stats;
-			this.History = new Dictionary<string, EventOutcome>();
+			this.History = new Dictionary<Event, EventOutcome>();
 		}
 
 		public bool IsResting()
@@ -91,7 +91,7 @@ namespace TP2Dispatch
 			this.RestRemaining--;
 		}
 
-		public void ResolveEvent(string eventDone, EventOutcome outcome)
+		public void ResolveEvent(Event eventDone, EventOutcome outcome)
 		{
 			int restNeeded = MISSION_REST_INCREASE;
 			if (outcome == EventOutcome.Success)
@@ -102,15 +102,17 @@ namespace TP2Dispatch
 			this.History.Add(eventDone, outcome);
 		}
 
-		public string GetHistory()
-		{
-			string allHistory = string.Empty;
-			foreach (KeyValuePair <string, EventOutcome> history in History)
-			{
-				allHistory += $"{history.Key} : {history.Value}; ";
-			}
-			return allHistory;
-		}
+		//public string GetHistory()
+		//{
+		//	string allHistory = string.Empty;
+		//	foreach (KeyValuePair <Event, EventOutcome> history in History)
+		//	{
+		//		allHistory += $"{history.Key.Name} : {history.Value}; ";
+		//	}
+		//	if (allHistory == "")
+		//		allHistory = "aucun événement résolu";
+		//	return allHistory;
+		//}
 
 		private void LevelUp() //À mettre private quand ResolveEvent va fonctionner
 		{
@@ -163,6 +165,11 @@ namespace TP2Dispatch
 					hasMaxStats = false;
 			}
 			return hasMaxStats;
+		}
+
+		public override string ToString()
+		{
+			return $"[{this.RestRemaining}] {this.Name, -24} , Level {this.Level} : {this.PlayerStats}";
 		}
 	}
 }
